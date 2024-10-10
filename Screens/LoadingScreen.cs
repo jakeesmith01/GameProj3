@@ -90,7 +90,8 @@ namespace Screens
                 var spriteBatch = ScreenManager.SpriteBatch;
                 var font = ScreenManager.Font;
 
-                const string message = "Loading...";
+                const string message = "Moving in to an asteroid field...";
+                const string messageTwo = "Your ship can only take 3 hits!";
 
                 // Center the text in the viewport.
                 var viewport = ScreenManager.GraphicsDevice.Viewport;
@@ -103,6 +104,7 @@ namespace Screens
                 // Draw the text.
                 spriteBatch.Begin();
                 spriteBatch.DrawString(font, message, textPosition, color);
+                spriteBatch.DrawString(font, messageTwo, textPosition + new Vector2(0, 50), color);
                 spriteBatch.End();
             }
         }

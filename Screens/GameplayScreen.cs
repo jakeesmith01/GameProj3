@@ -155,11 +155,12 @@ namespace Screens
 
                 if(_gamePaused){
                     _explosions.Update(gameTime);
-                    return;
-                }
 
-                if(_player.Dead){
-                    ScreenManager.AddScreen(new LoseScreen(), ControllingPlayer);
+                    if(_player.Dead){
+                        ScreenManager.AddScreen(new LoseScreen(), ControllingPlayer);
+                    }
+                    
+                    return;
                 }
 
                 _stars.Update(gameTime);
