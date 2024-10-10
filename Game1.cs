@@ -1,51 +1,57 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Screens;
+using StateManagement;
 
-namespace GameProj3;
-
-public class Game1 : Game
+namespace GameProj3
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-
-    public Game1()
+    // Sample showing how to manage different game states, with transitions
+    // between menu screens, a loading screen, the game itself, and a pause
+    // menu. This main game class is extremely simple: all the interesting
+    // stuff happens in the ScreenManager component.
+    public class Game1 : Game
     {
-        _graphics = new GraphicsDeviceManager(this);
-        Content.RootDirectory = "Content";
-        IsMouseVisible = true;
-    }
+        private GraphicsDeviceManager _graphics;
+        private readonly ScreenManager _screenManager;
+        
+        public Game1()
+        {
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
 
-    protected override void Initialize()
-    {
-        // TODO: Add your initialization logic here
+            var screenFactory = new ScreenFactory();
+            Services.AddService(typeof(IScreenFactory), screenFactory);
 
-        base.Initialize();
-    }
+            _screenManager = new ScreenManager(this);
+            Components.Add(_screenManager);
 
-    protected override void LoadContent()
-    {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+            AddInitialScreens();
+        }
 
-        // TODO: use this.Content to load your game content here
-    }
+        private void AddInitialScreens()
+        {
+            _screenManager.AddScreen(new BackgroundScreen(), null);
+            _screenManager.AddScreen(new MainMenuScreen(), null);
+        }
 
-    protected override void Update(GameTime gameTime)
-    {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
+        protected override void Initialize()
+        {
+            base.Initialize();
+        }
 
-        // TODO: Add your update logic here
+        protected override void LoadContent() { }
 
-        base.Update(gameTime);
-    }
+        protected override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
 
-    protected override void Draw(GameTime gameTime)
-    {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        // TODO: Add your drawing code here
-
-        base.Draw(gameTime);
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            base.Draw(gameTime);    // The real drawing happens inside the ScreenManager component
+        }
     }
 }
