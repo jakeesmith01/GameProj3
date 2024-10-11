@@ -39,6 +39,7 @@ namespace GameProj3
         protected override void Initialize()
         {
             base.Initialize();
+            Window.Title = "Asteroid Mayhem";
         }
 
         protected override void LoadContent() { }
