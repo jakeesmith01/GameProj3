@@ -25,9 +25,50 @@ namespace StateManagement
         /// </summary>
         /// <param name="content">The content manager to load with</param>
         public void LoadContent(ContentManager content){
-            
+            _backgroundMusic = content.Load<Song>("Ludum Dare 28 01");
+            _damageSound = content.Load<SoundEffect>("Explosion6");
+            _loseSound = content.Load<SoundEffect>("lose");
+
+            MediaPlayer.Volume = GameSettings.MusicVolume / 3; // hardcoded at 1/3rd because it is SUPER loud and you cant hear the sound effects unless turning it down
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(_backgroundMusic);
         }
 
+        /// <summary>
+        /// Plays the explosion sound effect
+        /// </summary>
+        public void PlayDamageSound(){
+            _damageSound.Play(GameSettings.SFXVolume, 0, 0);
+        }
+
+        /// <summary>
+        /// Plays the losing sound effect
+        /// </summary>
+        public void PlayLoseSound(){
+            MediaPlayer.Pause();
+            _loseSound.Play(GameSettings.SFXVolume, 0, 0);
+        }
+
+        /// <summary>
+        /// Pauses the MediaPlayer (background music)
+        /// </summary>
+        public void PauseMusic(){
+            MediaPlayer.Pause();
+        }
+
+        /// <summary>
+        /// Resumes the MediaPlayer (background music)
+        /// </summary>
+        public void StartMusic(){
+            MediaPlayer.Resume();
+        }
+
+        /// <summary>
+        /// Updates the volume of the MediaPlayer
+        /// </summary>
+        public void UpdateVolume(){
+            MediaPlayer.Volume = GameSettings.MusicVolume / 3;
+        }
         
 
         

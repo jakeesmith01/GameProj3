@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Collisions;
 using StateManagement;
+using System.Data.Common;
 
 namespace Player
 {
@@ -20,9 +21,6 @@ namespace Player
 
         // the bounding triangle for the ship
         private BoundingTriangle _hitbox;
-
-        // the current input state
-        private InputState input;
 
         // the angle of the ship
         private float _angle;
@@ -151,11 +149,9 @@ namespace Player
         {
             Vector2 origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
 
-            
+            if(Health <= 0) spriteBatch.Draw(_texture, Position, null, Color.Red, _angle, origin, 0.5f, SpriteEffects.None, 0);
 
-            spriteBatch.Draw(_texture, Position, null, Color.White, _angle, origin, 0.5f, SpriteEffects.None, 0);
-
-            
+            else spriteBatch.Draw(_texture, Position, null, Color.White, _angle, origin, 0.5f, SpriteEffects.None, 0);            
         }
 
         /// <summary>

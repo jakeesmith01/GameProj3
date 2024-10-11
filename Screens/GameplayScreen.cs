@@ -57,6 +57,8 @@ namespace Screens
         private float _zoomScale;
 
         private bool _gamePaused;
+
+        private SoundManager _sounds = new SoundManager();
         
 
         /// <summary>
@@ -103,6 +105,9 @@ namespace Screens
             //ScreenManager.Game.Components.Add(asteroids);
 
             _explosions = new ExplosionParticleSystem(ScreenManager, 20);
+
+            _sounds.LoadContent(_content);
+            _sounds.UpdateVolume();
         }
 
         /// <summary>
@@ -157,7 +162,8 @@ namespace Screens
                     _explosions.Update(gameTime);
 
                     if(_player.Dead){
-                        ScreenManager.AddScreen(new LoseScreen(), ControllingPlayer);
+                        _sounds.PlayLoseSound();
+                        ScreenManager.AddScreen(new LoseScreen(_asteroids.NumParticles), ControllingPlayer);
                     }
                     
                     return;
@@ -241,6 +247,7 @@ namespace Screens
                 _zoomScale = 1.0f;
 
                 _explosions.PlaceExplosion(p.Position);
+                _sounds.PlayDamageSound();
             }
 
 

@@ -56,6 +56,12 @@
 /processorParam:TextureFormat=Color
 /build:explosion.png
 
+#begin Explosion6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Explosion6.wav
+
 #begin gradient.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -67,6 +73,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:gradient.png
+
+#begin lose.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:lose.wav
+
+#begin Ludum Dare 28 01.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Ludum Dare 28 01.ogg
 
 #begin meteorBrown_big3.png
 /importer:TextureImporter

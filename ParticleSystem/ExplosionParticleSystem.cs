@@ -77,7 +77,7 @@ namespace ParticleSystem
 
             particle.Scale = 0.1f + 0.25f * normalizedLifetime; // the scale of the particle makes it grow and shrink
 
-            Console.WriteLine("Particle at: " + particle.Position);
+            //Console.WriteLine("Particle at: " + particle.Position);
         }
 
         /// <summary>

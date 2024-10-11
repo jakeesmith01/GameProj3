@@ -15,6 +15,8 @@ namespace ParticleSystem{
         private float _particleTimer;
         private const float TimeBetweenParticles = 1.0f;
 
+        public int NumParticles { get; set; } = 0;
+
         
         /// <summary>
         /// Determines if the asteroid particle system is active or not
@@ -65,6 +67,7 @@ namespace ParticleSystem{
                 if(_particleTimer >= TimeBetweenParticles){
                     AddParticles(_source);
                     _particleTimer = 0;
+                    NumParticles++;
                 }
 
                 CheckCollisions();

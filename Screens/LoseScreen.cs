@@ -9,8 +9,12 @@ using StateManagement;
 namespace Screens{
     public class LoseScreen : MenuScreen
     {
-	    public LoseScreen() : base("You Lost!") 
+        private int _score;
+
+	    public LoseScreen(int score) : base("You Lost!") 
 	    {
+            _score = score;
+            var scoreMenuEntry = new MenuEntry("You dodged " + score + " asteroids!");
             var PlayAgainMenuEntry = new MenuEntry("Play Again");
             var ReturnToMainMenuEntry = new MenuEntry("Return to Main Menu");
             var QuitGameMenuEntry = new MenuEntry("Quit Game");
@@ -19,6 +23,7 @@ namespace Screens{
             ReturnToMainMenuEntry.Selected += ReturnToMainMenuEntrySelected;
             QuitGameMenuEntry.Selected += QuitGameMenuEntrySelected;
 
+            MenuEntries.Add(scoreMenuEntry);
             MenuEntries.Add(PlayAgainMenuEntry);
             MenuEntries.Add(ReturnToMainMenuEntry);
             MenuEntries.Add(QuitGameMenuEntry);
